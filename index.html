@@ -35,7 +35,6 @@
 <a id="spark-overview" class="anchor" href="#spark-overview" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Spark Overview</h3>
 
 <article>
-                    <h3>Spark Overview</h3>
                     <p>
                         Spark is an open source distributed computing data processing framework. Spark allows for data sharing between processing steps, in contrast
                          to Hadoop's requirement of persisting data to disk at each step. It was started at UC Berkeley in 2009, by Matei Zaharia.
@@ -44,6 +43,7 @@
                     <p>
                         Spark can be used for four styles of data analysis and processing. These are
                         batch, streaming, iterative, and interactive.
+                      </p>
                         <dl>
                             <dt>Batch</dt>
                             <dd>Manipulating large datasets, typically performing map-reduce jobs</dd>
@@ -54,7 +54,7 @@
                             <dt>Interactive</dt>
                             <dd>Data exploration of large chunks of data</dd>
                         </dl>
-                    </p>
+                    
                     <p>
                         Spark enables creating complex, multi-stage data processing routines, and provides a high-level API and fault tolerance. It was developed
                         as an alternative to using MapReduce on Hadoop for interactive queries or real-time, low-latency applications. Spark uses a distributed,
@@ -74,6 +74,7 @@
                     <p>
                         Spark operates in three modes: single mode which is standalone on a single machine, distributed on YARN, or distributed on Mesos which is a cluster
                         manager developed with Spark at Berkeley. Spark includes the following libraries:
+                      </p>
                         <dl>
                             <dt>Spark SQL</dt>
                             <dd>SQL like queries to explore large structured datasets</dd>
@@ -84,12 +85,12 @@
                             <dt>Spark GraphX</dt>
                             <dd>Processing and computation on connected entities and relationships.</dd>
                         </dl>
-                    </p>
+                    
                 </article>
                 <Divider />
                 <article>
                     <h3>Hadoop for Spark: HDFS and YARN</h3>
-                    <h4>HDFS</h4>
+                    <h4 style="text-decoration: underline">HDFS</h4>
                     <p>
                         HDFS is a distributed, fault-tolerant, scalable, high-concurrency supporting, virtual file-system. HDFS maintains an immutability
                         property for data, meaning that data is unable to be updated after it is committed to the filesystem.
@@ -109,7 +110,7 @@
                              provide block reports to the NameNode, and perform block creation, deletion, and replication based on instructions from the NameNode.</dd>
                     </dl>
                     <br />
-                    <h4>YARN</h4>
+                    <h4 style="text-decoration: underline">YARN</h4>
                     <p>
                         YARN schedules and orchestrates applications, jobs, and tasks in Hadoop.
                     </p>
