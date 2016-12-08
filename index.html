@@ -1,0 +1,109 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <title>Howto by shoedog</title>
+
+    <link rel="stylesheet" href="stylesheets/styles.css">
+    <link rel="stylesheet" href="stylesheets/github-light.css">
+    <meta name="viewport" content="width=device-width">
+    <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+  </head>
+  <body>
+    <div class="wrapper">
+      <header>
+        <h1>Howto</h1>
+        <p>CS496 How To</p>
+
+        <p class="view"><a href="https://github.com/shoedog/howto">View the Project on GitHub <small>shoedog/howto</small></a></p>
+
+
+        <ul>
+          <li><a href="https://github.com/shoedog/howto/zipball/master">Download <strong>ZIP File</strong></a></li>
+          <li><a href="https://github.com/shoedog/howto/tarball/master">Download <strong>TAR Ball</strong></a></li>
+          <li><a href="https://github.com/shoedog/howto">View On <strong>GitHub</strong></a></li>
+        </ul>
+      </header>
+      <section>
+        <h2>
+<a id="introduction-to-apache-spark" class="anchor" href="#introduction-to-apache-spark" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Introduction to Apache Spark</h2>
+
+<h3>
+<a id="spark-overview" class="anchor" href="#spark-overview" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Spark Overview</h3>
+
+<p>Spark is an open source distributed computing data processing framework. Spark allows for data sharing between processing steps, in contrast to Hadoop's requirement of persisting data to disk at each step. It was started at UC Berkeley in 2009, by Matei Zaharia. Spark was donated to the Apache Software Foundation in 2013 and as of 2015 is one of the most active Apache projects.<br>
+Spark can be used for four styles of data analysis and processing. These are batch, streaming, iterative, and interactive.  </p>
+
+<ul>
+<li>Batch
+Manipulating large datasets, typically performing map-reduce jobs</li>
+<li>Streaming
+Processing incoming information in near real-time</li>
+<li>Iterative
+Used for machine learning algorithms, where data is accessed repetitively</li>
+<li>Interactive
+Data exploration of large chunks of data<br>
+</li>
+</ul>
+
+<p>Spark enables creating complex, multi-stage data processing routines, and provides a high-level API and fault tolerance. It was developed as an alternative to using MapReduce on Hadoop for interactive queries or real-time, low-latency applications. Spark uses a distributed, fault-tolerant, in-memory structure called a Resilient Distributed DataSet (RDD) as an alternative to the persistence of intermediate data to disk between the Map and Reduce processing phases of Hadoop to increase performance. </p>
+
+<p>Spark is written in Scala and provides support for programming interfaces in Scala, Python, Java, SQL, and R. The tutorial will use Python to demonstrate Spark. Spark can be used through an interactive Shell or through a spark-submit command for a Spark job. The interactive shell is usually used for development and spark-submit is usually used for production.<br>
+Spark is usually used to process data in Hadoop, but can be used with local and network file systems, Object storage like Amazon S3, Relational Databases, NoSQL stores, and messaging systems. Spark interacts with Hadoop through the HDFS (Hadoop Distributed File System) which can be an input source or output target. Hadoop's scheduling subsystem YARN( Yet Another Resource Negotiator) can schedule resources for Spark.<br>
+Spark operates in three modes: single mode which is standalone on a single machine, distributed on YARN, or distributed on Mesos which is a cluster manager developed with Spark at Berkeley. Spark includes the following libraries:</p>
+
+<p>*Spark SQL
+SQL like queries to explore large structured datasets
+*Spark Mlib
+Algorithms and a framework for machine learning
+*Spark Streaming
+Near real-time processing and analysis on streams of data
+*Spark GraphX
+Processing and computation on connected entities and relationships.  </p>
+
+<h3>
+<a id="hadoop-for-spark-hdfs-and-yarn" class="anchor" href="#hadoop-for-spark-hdfs-and-yarn" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Hadoop for Spark: HDFS and YARN</h3>
+
+<h4>
+<a id="hdfs" class="anchor" href="#hdfs" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>HDFS</h4>
+
+<p>HDFS is a distributed, fault-tolerant, scalable, high-concurrency supporting, virtual file-system. HDFS maintains an immutability property for data, meaning that data is unable to be updated after it is committed to the filesystem.<br>
+Files consist of blocks which default to 128MB, but are configurable to other sizes. Upon input to HDFS, files are divided into blocks, distrubuted, and replicated. A 400MB file will be divided into 3 blocks of 128MB and a block of 50MB. If a Hadoop cluster contains multiple nodes, blocks are distributed among slave nodes without being shared. Blocks are replicated according to a defined replication factor which is usually set to 3 when there are 3 or more nodes.  </p>
+
+<p>*NameNode
+The NameNode is the master server that manages file system namespace and regulates access to files by clients. It handles namespace file operations like opening, closing, and renaming files and directors, and determines mapping of blocks to DataNodes.
+*DataNodes
+DataNodes manage storage attached to the nodes that the cluster runs on, serve read and write requests from clients, manage local storage, provide block reports to the NameNode, and perform block creation, deletion, and replication based on instructions from the NameNode.  </p>
+
+<h4>
+<a id="yarn" class="anchor" href="#yarn" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>YARN</h4>
+
+<p>YARN schedules and orchestrates applications, jobs, and tasks in Hadoop.</p>
+
+<ul>
+<li>NameManagers
+Worker daemons, processes, or agents that carry out tasks</li>
+<li>tasks
+An individual unit of work such as a Map task. Each task has at least one task attempt. Tasks can be attempted more than once due to failure, or due to speculative execution. With speculative execution, a task that is running slower relative to other concurrent tasks is started on another NodeManager and the result of the first completed task is used.</li>
+<li>application
+A complete set of tasks.</li>
+<li>ResourceManager
+YARN daemon that assigns the ApplicationMaster for an application and keeps track of available resources on the NodeManagers.</li>
+<li>ApplicationsMaster
+A delegate process for managing the execution and status of an application. It determines required container resources for an application and negotiates for these with the ResourceManager.</li>
+<li>containers
+Compute and memory resources presented to applications to perform tasks.</li>
+</ul>
+      </section>
+      <footer>
+        <p>This project is maintained by <a href="https://github.com/shoedog">shoedog</a></p>
+        <p><small>Hosted on GitHub Pages &mdash; Theme by <a href="https://github.com/orderedlist">orderedlist</a></small></p>
+      </footer>
+    </div>
+    <script src="javascripts/scale.fix.js"></script>
+    
+  </body>
+</html>
