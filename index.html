@@ -34,69 +34,105 @@
 <h3>
 <a id="spark-overview" class="anchor" href="#spark-overview" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Spark Overview</h3>
 
-<p>Spark is an open source distributed computing data processing framework. Spark allows for data sharing between processing steps, in contrast to Hadoop's requirement of persisting data to disk at each step. It was started at UC Berkeley in 2009, by Matei Zaharia. Spark was donated to the Apache Software Foundation in 2013 and as of 2015 is one of the most active Apache projects.<br>
-Spark can be used for four styles of data analysis and processing. These are batch, streaming, iterative, and interactive.  </p>
-
-<ul>
-<li>Batch
-Manipulating large datasets, typically performing map-reduce jobs</li>
-<li>Streaming
-Processing incoming information in near real-time</li>
-<li>Iterative
-Used for machine learning algorithms, where data is accessed repetitively</li>
-<li>Interactive
-Data exploration of large chunks of data<br>
-</li>
-</ul>
-
-<p>Spark enables creating complex, multi-stage data processing routines, and provides a high-level API and fault tolerance. It was developed as an alternative to using MapReduce on Hadoop for interactive queries or real-time, low-latency applications. Spark uses a distributed, fault-tolerant, in-memory structure called a Resilient Distributed DataSet (RDD) as an alternative to the persistence of intermediate data to disk between the Map and Reduce processing phases of Hadoop to increase performance. </p>
-
-<p>Spark is written in Scala and provides support for programming interfaces in Scala, Python, Java, SQL, and R. The tutorial will use Python to demonstrate Spark. Spark can be used through an interactive Shell or through a spark-submit command for a Spark job. The interactive shell is usually used for development and spark-submit is usually used for production.<br>
-Spark is usually used to process data in Hadoop, but can be used with local and network file systems, Object storage like Amazon S3, Relational Databases, NoSQL stores, and messaging systems. Spark interacts with Hadoop through the HDFS (Hadoop Distributed File System) which can be an input source or output target. Hadoop's scheduling subsystem YARN( Yet Another Resource Negotiator) can schedule resources for Spark.<br>
-Spark operates in three modes: single mode which is standalone on a single machine, distributed on YARN, or distributed on Mesos which is a cluster manager developed with Spark at Berkeley. Spark includes the following libraries:</p>
-
-<p>*Spark SQL
-SQL like queries to explore large structured datasets
-*Spark Mlib
-Algorithms and a framework for machine learning
-*Spark Streaming
-Near real-time processing and analysis on streams of data
-*Spark GraphX
-Processing and computation on connected entities and relationships.  </p>
-
-<h3>
-<a id="hadoop-for-spark-hdfs-and-yarn" class="anchor" href="#hadoop-for-spark-hdfs-and-yarn" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Hadoop for Spark: HDFS and YARN</h3>
-
-<h4>
-<a id="hdfs" class="anchor" href="#hdfs" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>HDFS</h4>
-
-<p>HDFS is a distributed, fault-tolerant, scalable, high-concurrency supporting, virtual file-system. HDFS maintains an immutability property for data, meaning that data is unable to be updated after it is committed to the filesystem.<br>
-Files consist of blocks which default to 128MB, but are configurable to other sizes. Upon input to HDFS, files are divided into blocks, distrubuted, and replicated. A 400MB file will be divided into 3 blocks of 128MB and a block of 50MB. If a Hadoop cluster contains multiple nodes, blocks are distributed among slave nodes without being shared. Blocks are replicated according to a defined replication factor which is usually set to 3 when there are 3 or more nodes.  </p>
-
-<p>*NameNode
-The NameNode is the master server that manages file system namespace and regulates access to files by clients. It handles namespace file operations like opening, closing, and renaming files and directors, and determines mapping of blocks to DataNodes.
-*DataNodes
-DataNodes manage storage attached to the nodes that the cluster runs on, serve read and write requests from clients, manage local storage, provide block reports to the NameNode, and perform block creation, deletion, and replication based on instructions from the NameNode.  </p>
-
-<h4>
-<a id="yarn" class="anchor" href="#yarn" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>YARN</h4>
-
-<p>YARN schedules and orchestrates applications, jobs, and tasks in Hadoop.</p>
-
-<ul>
-<li>NameManagers
-Worker daemons, processes, or agents that carry out tasks</li>
-<li>tasks
-An individual unit of work such as a Map task. Each task has at least one task attempt. Tasks can be attempted more than once due to failure, or due to speculative execution. With speculative execution, a task that is running slower relative to other concurrent tasks is started on another NodeManager and the result of the first completed task is used.</li>
-<li>application
-A complete set of tasks.</li>
-<li>ResourceManager
-YARN daemon that assigns the ApplicationMaster for an application and keeps track of available resources on the NodeManagers.</li>
-<li>ApplicationsMaster
-A delegate process for managing the execution and status of an application. It determines required container resources for an application and negotiates for these with the ResourceManager.</li>
-<li>containers
-Compute and memory resources presented to applications to perform tasks.</li>
-</ul>
+<article>
+                    <h3>Spark Overview</h3>
+                    <p>
+                        Spark is an open source distributed computing data processing framework. Spark allows for data sharing between processing steps, in contrast
+                         to Hadoop's requirement of persisting data to disk at each step. It was started at UC Berkeley in 2009, by Matei Zaharia.
+                        Spark was donated to the Apache Software Foundation in 2013 and as of 2015 is one of the most active Apache projects.
+                    </p>
+                    <p>
+                        Spark can be used for four styles of data analysis and processing. These are
+                        batch, streaming, iterative, and interactive.
+                        <dl>
+                            <dt>Batch</dt>
+                            <dd>Manipulating large datasets, typically performing map-reduce jobs</dd>
+                            <dt>Streaming</dt>
+                            <dd>Processing incoming information in near real-time</dd>
+                            <dt>Iterative</dt>
+                            <dd>Used for machine learning algorithms, where data is accessed repetitively</dd>
+                            <dt>Interactive</dt>
+                            <dd>Data exploration of large chunks of data</dd>
+                        </dl>
+                    </p>
+                    <p>
+                        Spark enables creating complex, multi-stage data processing routines, and provides a high-level API and fault tolerance. It was developed
+                        as an alternative to using MapReduce on Hadoop for interactive queries or real-time, low-latency applications. Spark uses a distributed,
+                        fault-tolerant, in-memory structure called a Resilient Distributed DataSet (RDD) as an alternative to the persistence of intermediate data to
+                        disk between the Map and Reduce processing phases of Hadoop to increase performance.
+                    </p>
+                    <p>
+                        Spark is written in Scala and provides support for programming interfaces in Scala, Python, Java, SQL, and R. The tutorial will use Python
+                        to demonstrate Spark. Spark can be used through an interactive Shell or through a spark-submit command for a Spark job. The interactive shell
+                        is usually used for development and spark-submit is usually used for production.
+                    </p>
+                    <p>
+                        Spark is usually used to process data in Hadoop, but can be used with local and network file systems, Object storage like Amazon S3, Relational
+                        Databases, NoSQL stores, and messaging systems. Spark interacts with Hadoop through the <em>HDFS</em> (Hadoop Distributed File System) which can be an input
+                        source or output target. Hadoop's scheduling subsystem <em>YARN</em> ( Yet Another Resource Negotiator) can schedule resources for Spark.
+                    </p>
+                    <p>
+                        Spark operates in three modes: single mode which is standalone on a single machine, distributed on YARN, or distributed on Mesos which is a cluster
+                        manager developed with Spark at Berkeley. Spark includes the following libraries:
+                        <dl>
+                            <dt>Spark SQL</dt>
+                            <dd>SQL like queries to explore large structured datasets</dd>
+                            <dt>Spark Mlib</dt>
+                            <dd>Algorithms and a framework for machine learning</dd>
+                            <dt>Spark Streaming</dt>
+                            <dd>Near real-time processing and analysis on streams of data</dd>
+                            <dt>Spark GraphX</dt>
+                            <dd>Processing and computation on connected entities and relationships.</dd>
+                        </dl>
+                    </p>
+                </article>
+                <Divider />
+                <article>
+                    <h3>Hadoop for Spark: HDFS and YARN</h3>
+                    <h4>HDFS</h4>
+                    <p>
+                        HDFS is a distributed, fault-tolerant, scalable, high-concurrency supporting, virtual file-system. HDFS maintains an immutability
+                        property for data, meaning that data is unable to be updated after it is committed to the filesystem.
+                    </p>
+                    <p>
+                        Files consist of <em>blocks</em> which default to 128MB, but are configurable to other sizes. Upon input to HDFS, files are divided into blocks,
+                        distrubuted, and replicated. A 400MB file will be divided into 3 blocks of 128MB and a block of 50MB. If a Hadoop cluster contains multiple nodes,
+                        blocks are distributed among slave nodes without being shared. Blocks are replicated according to a defined <em>replication factor</em> which is
+                        usually set to 3 when there are 3 or more nodes.
+                    </p>
+                    <dl>
+                        <dt>NameNode</dt>
+                        <dd>The NameNode is the master server that manages file system namespace and regulates access to files by clients. It handles namespace file
+                         operations like opening, closing, and renaming files and directors, and determines mapping of blocks to DataNodes.</dd>
+                        <dt>DataNodes</dt>
+                        <dd>DataNodes manage storage attached to the nodes that the cluster runs on, serve read and write requests from clients, manage local storage,
+                             provide block reports to the NameNode, and perform block creation, deletion, and replication based on instructions from the NameNode.</dd>
+                    </dl>
+                    <br />
+                    <h4>YARN</h4>
+                    <p>
+                        YARN schedules and orchestrates applications, jobs, and tasks in Hadoop.
+                    </p>
+                    <dl>
+                        <dt>NameManagers</dt>
+                        <dd>Worker daemons, processes, or agents that carry out tasks</dd>
+                        <dt>tasks</dt>
+                        <dd>An individual unit of work such as a Map task. Each task has at least one task attempt.
+                        Tasks can be attempted more than once due to failure, or due to speculative execution..
+                        With speculative execution, a task that is running slower relative to other concurrent tasks is started
+                         on another NodeManager and the result of the first completed task is used.</dd>
+                        <dt>application</dt>
+                        <dd>A complete set of tasks.</dd>
+                        <dt>ResourceManager</dt>
+                        <dd>YARN daemon that assigns the ApplicationMaster for an application and keeps track of available
+                         resources on the NodeManagers.</dd>
+                        <dt>ApplicationsMaster</dt>
+                        <dd>A delegate process for managing the execution and status of an application. It determines required
+                        container resources for an application and negotiates for these with the ResourceManager.</dd>
+                        <dt>containers</dt>
+                        <dd>Compute and memory resources presented to applications to perform tasks.</dd>
+                    </dl>
+                </article>
       </section>
       <footer>
         <p>This project is maintained by <a href="https://github.com/shoedog">shoedog</a></p>
